@@ -1,0 +1,2 @@
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `image_url`, `email_address`, `username`, `password`, `salt`, `phone_verified`, `email_verified`, `created_at`, `created_by`, `active`)
+VALUES (1, 'Murtadha', 'Ali', 'http://res.cloudinary.com/boripe/image/upload/v1560089039/serve90/99654-name.jpg', 'admin@email.com', 'admin', 'onbmOP+X9HJ0T6e8oZysVI6o6QzO3oYNjGKDABGzr8nuE0KB5rpU57v2D353FjcYgnFhn5b9bU2QpZMR7EEgwQ==', 'BCipJy/ulE2KNHlnJSpN3c9Sj5sgBatei5BTJRIr5F8=', 1, 1, NOW(), 'system', 1);

@@ -1,0 +1,50 @@
+kumuluzee:
+  name: users-service
+  env:
+    name: dev
+  version: 1.0.0
+  server:
+    base-url: http://localhost:8082
+    http:
+      port: 8082
+  jwt-auth:
+    public-key: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAuRJBnLd9S6dkJKrpPEB+p3EZ2yOwEfkF99UvCGe5m8ZmjwiHVcY7HnTKAaHSP+G6T0Ft7DYGejQExMq77AvqDpZusNwWhOF6i8fFQZCT/bX+s0Qb3arEzgAmxPfXLNjQ6Ma7wrISdM2B8x43NO+8N2GxXqSMMlp9WLjl0kEBWdo7Xq7zA1OmesGniXfEAvi1rjCnLaQLJUIcwCRywLRcS28NPu/AJSv5wLhOOBari/zV5RGpL3xCJBswgZE9nozxtJuPFbtnRYLFQVSN8qk4+JEQrIa0lI9bRGgsjbe4GWdB4N0ZwUdxhywwFB4C0SKB/nwpFG6jt/IVvA9USsSuZwIDAQAB
+    issuer: http://example.org/auth
+    enabled: true
+  swagger:
+    base-url: http://localhost:8082/v1
+    enabled: true
+    ui:
+      enabled: true
+  datasources:
+    - jndi-name: jdbc/UsersDS
+      connection-url: jdbc:postgresql://localhost:5432/revenuedb
+      username: postgres
+      password: SeconD
+      pool:
+        max-size: 20
+  metrics:
+    web-instrumentation:
+      - name: users-endpoint
+        url-pattern: /v1/users/*
+  logs:
+    config-file:
+      '<?xml version="1.0" encoding="UTF-8"?>
+       <Configuration name="users-logging">
+           <Appenders>
+               <Console name="console" target="SYSTEM_OUT">
+                   <PatternLayout pattern="%d %p %marker %m %X %ex %n"/>
+               </Console>
+               <!-- A socket definition for sending logs into Logstash using TCP and JSON format.-->
+               <!--<Socket name="logstash" host="192.168.99.100" port="5043" protocol="tcp">
+                   <JSONLayout complete="false" compact="true" eventEol="true" charset="UTF-8" properties="true"/>
+               </Socket>-->
+           </Appenders>
+           <Loggers>
+               <!-- Default logger -->
+               <Root level="trace">
+                   <AppenderRef ref="console"/>
+                   <AppenderRef ref="logstash"/>
+               </Root>
+           </Loggers>
+       </Configuration>'
