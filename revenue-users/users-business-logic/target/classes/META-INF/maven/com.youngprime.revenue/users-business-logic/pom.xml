@@ -1,67 +1,104 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-  <parent>
-  	<groupId>com.youngprime.revenue</groupId>
-  	<artifactId>revenue-users</artifactId>
-  	<version>1.0.0</version>
-  </parent>
-  
-  <artifactId>users-business-logic</artifactId>
-  <name>Users Business Logic</name>
-  
-  <url>http://maven.apache.org</url>
+	<parent>
+		<groupId>com.youngprime.revenue</groupId>
+		<artifactId>revenue-users</artifactId>
+		<version>1.0.0</version>
+	</parent>
 
-  <dependencies>
-        <dependency>
-            <groupId>com.kumuluz.ee</groupId>
-            <artifactId>kumuluzee-cdi-weld</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.kumuluz.ee</groupId>
-            <artifactId>kumuluzee-jax-rs-jersey</artifactId>
-            <scope>provided</scope>
-        </dependency>
+	<artifactId>users-business-logic</artifactId>
+	<name>Users Business Logic</name>
 
-        <dependency>
-            <groupId>com.kumuluz.ee.rest</groupId>
-            <artifactId>kumuluzee-rest-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.kumuluz.ee.logs</groupId>
-            <artifactId>kumuluzee-logs-log4j2</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.kumuluz.ee.config</groupId>
-            <artifactId>kumuluzee-config-etcd</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.kumuluz.ee.discovery</groupId>
-            <artifactId>kumuluzee-discovery-etcd</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-        </dependency>
+	<url>http://maven.apache.org</url>
 
-        <dependency>
-            <groupId>com.youngprime.revenue</groupId>
-            <artifactId>users-persistence</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-        <dependency>
+	<dependencies>
+		<dependency>
+			<groupId>com.kumuluz.ee</groupId>
+			<artifactId>kumuluzee-cdi-weld</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.kumuluz.ee</groupId>
+			<artifactId>kumuluzee-jax-rs-jersey</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.kumuluz.ee.rest</groupId>
+			<artifactId>kumuluzee-rest-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.kumuluz.ee.logs</groupId>
+			<artifactId>kumuluzee-logs-log4j2</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.kumuluz.ee.config</groupId>
+			<artifactId>kumuluzee-config-etcd</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.kumuluz.ee.discovery</groupId>
+			<artifactId>kumuluzee-discovery-etcd</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.youngprime.revenue</groupId>
+			<artifactId>users-persistence</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
 			<groupId>org.mapstruct</groupId>
 			<artifactId>mapstruct</artifactId>
 		</dependency>
 		<dependency>
-            <groupId>org.mapstruct</groupId>
-            <artifactId>mapstruct-processor</artifactId>
-            <version>${mapstruct.version}</version>
-            <!-- IntelliJ does not pick up the processor if it is not in the dependencies.
-             There is already an open issue for IntelliJ see https://youtrack.jetbrains.com/issue/IDEA-150621
-            -->
-            <scope>provided</scope>
-        </dependency>
-    </dependencies>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct-processor</artifactId>
+			<version>${mapstruct.version}</version>
+			<!-- IntelliJ does not pick up the processor if it is not in the dependencies. 
+				There is already an open issue for IntelliJ see https://youtrack.jetbrains.com/issue/IDEA-150621 -->
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcprov-jdk15on</artifactId>
+			<type>jar</type>
+		</dependency>
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.cloudinary</groupId>
+			<artifactId>cloudinary-taglib</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.cloudinary</groupId>
+			<artifactId>cloudinary-http44</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.google.firebase</groupId>
+			<artifactId>firebase-admin</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>javax.mail-api</artifactId>
+		</dependency>
+	</dependencies>
 </project>

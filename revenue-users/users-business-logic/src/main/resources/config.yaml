@@ -1,0 +1,49 @@
+kumuluzee:
+  name: users-business-logic
+  version: 1.0.0
+  env:
+    name: dev
+  config:
+    start-retry-delay-ms: 500
+    max-retry-delay-ms: 900000
+    
+firebase-config:
+   cloud-name: boripe
+   api-key: 284343174278323
+   api-secret: CPvH1hXNsfm6uc_cWI_CfypkIV4
+   
+image-config:
+   folder: serve90
+   overwrite: true
+   format: jpg
+   resource-type: image
+   unique-filename: true
+   
+mail-config:
+   mail-host: smtp.gmail.com
+   mail-host-port: 587
+   sender-email-id: boripe2000@gmail.com
+   sender-password: kwonnecpfxgltyzf
+   mail-from: boripe2000@gmail.com
+   mail-personel: Investment System
+   template-location: C:\\projects\\eigr_setting\\mail_templates
+   verify-email-url: http://localhost:8082/v1/verify/
+   request-email-url: http://localhost:8082/v1/request/
+   
+sms-config:
+   url-sms-provider: https://www.80kobosms.com/tools/geturl/Sms.php
+   username-param-name: username
+   password-param-name: password
+   message-param-name: message
+   recipients-param-name: recipients
+   sender-param-name: Investment System
+   username: boripe2000@gmail.com
+   password: Boripe_2233
+   
+email-validator-config:
+   host-name: X-RapidAPI-Host
+   key-name: X-RapidAPI-Key
+   host-value: pozzad-email-validator.p.rapidapi.com
+   key-value: 9b3d478dfamsh74a436ed514ef47p17bdabjsn9148ab47aa5e
+   url: https://pozzad-email-validator.p.rapidapi.com/emailvalidator/validateEmail/
+  
