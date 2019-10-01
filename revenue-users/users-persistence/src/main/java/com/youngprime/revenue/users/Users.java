@@ -1,6 +1,9 @@
 package com.youngprime.revenue.users;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,8 +32,12 @@ import javax.validation.constraints.Size;
 		query="SELECT o FROM Users o WHERE o.username =:username AND o.password=:password")
 })
 //@UuidGenerator(name="idGenerator")
-public class Users {
+public class Users implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Transient
 	public static final String USER_GETALL = "Users.getAll";
 	@Transient
@@ -41,12 +48,12 @@ public class Users {
 	private String id;
 	
 	@NotEmpty
-	@Size(min=3, max=50, message="Username must be between 6 and 50 characters")
+	@Size(min=6, max=50, message="Username must be between 6 and 50 characters")
 	@Column(name="username", unique=true)
 	private String username;
 	
 	@NotEmpty
-	@Size(min=3, max=50, message="Password must be between 6 and 50 characters")
+	@Size(min=6, max=50, message="Password must be between 6 and 50 characters")
 	@Column(name="password")
 	private String password;
 	
@@ -59,12 +66,12 @@ public class Users {
 	private String emailAddress;
 	
 	@NotEmpty
-	@Size(min=3, max=50, message="First name must be between 6 and 50 characters")
+	@Size(min=6, max=50, message="First name must be between 6 and 50 characters")
 	@Column(name="first_name")
 	private String firstName;
 	
 	@NotEmpty
-	@Size(min=3, max=50, message="Last name must be between 6 and 50 characters")
+	@Size(min=6, max=50, message="Last name must be between 6 and 50 characters")
 	@Column(name="last_name")
 	private String lastName;
 	
@@ -126,6 +133,12 @@ public class Users {
 	@Version
 	private Integer version;
 
+	@Transient
+	private List<Roles> roles = new ArrayList<>();
+	
+	@Transient
+	private List<Permissions> permissions = new ArrayList<>();
+	
 	public String getId() {
 		return id;
 	}
@@ -333,4 +346,22 @@ public class Users {
 	public void setVersion(Integer version) {
 		this.version = version;
 	}
+
+	public List<Roles> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Roles> roles) {
+		this.roles = roles;
+	}
+
+	public List<Permissions> getPermissions() {
+		return permissions;
+	}
+
+	public void setPermissions(List<Permissions> permissions) {
+		this.permissions = permissions;
+	}
+	
+	
 }

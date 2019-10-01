@@ -1,1 +1,4 @@
+com\youngprime\revenue\users\mappers\UserMapper.class
+com\youngprime\revenue\users\mappers\DateMapper.class
+com\youngprime\revenue\users\mappers\UserMapperImpl.class
 com\youngprime\revenue\users\cdi\UsersBean.class

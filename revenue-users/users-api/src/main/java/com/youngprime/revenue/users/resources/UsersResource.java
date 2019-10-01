@@ -1,9 +1,10 @@
 package com.youngprime.revenue.users.resources;
 
-
 import com.kumuluz.ee.logs.cdi.Log;
 import com.youngprime.revenue.users.Users;
 import com.youngprime.revenue.users.cdi.UsersBean;
+import com.youngprime.revenue.users.dtos.UserDto;
+import com.youngprime.revenue.users.mappers.UserMapper;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -35,14 +36,17 @@ public class UsersResource {
     @Context
     protected UriInfo uriInfo;
 
-
+    @Inject
+	UserMapper userMapper;
+	
+    
     @GET
     @ApiOperation(value = "Get users", notes = "Returns a list of all users.", 
-    	response = Users.class, authorizations= { @Authorization(value="authorization") })
+    	response = UserDto.class, authorizations= { @Authorization(value="authorization") })
     @RolesAllowed({"users:view"})
     public Response getUsers() {
-    	System.out.println("I got here");
-        List<Users> users = usersBean.getUsers();
+		
+        List<UserDto> users = userMapper.fromUsers(usersBean.getUsers());
 
         return Response.ok(users).build();
     }
@@ -55,13 +59,13 @@ public class UsersResource {
 
         users = usersBean.getUsersFilter(uriInfo);
 
-        return Response.status(Response.Status.OK).entity(users).build();
+        return Response.status(Response.Status.OK).entity(userMapper.fromUsers(users)).build();
     }
 
     @GET
-    @ApiOperation(value = "Get a user", notes = "Returns a user with provided id.", response = Users.class)
+    @ApiOperation(value = "Get a user", notes = "Returns a user with provided id.", response = UserDto.class)
     @Path("/{userId}")
-    //@RolesAllowed("user")
+    @RolesAllowed("user")
     public Response getUser(@PathParam("userId") String userId) {
 
         Users user = usersBean.getUser(userId);
@@ -70,37 +74,37 @@ public class UsersResource {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
 
-        return Response.status(Response.Status.OK).entity(user).build();
+        return Response.status(Response.Status.OK).entity(userMapper.fromUser(user)).build();
     }
 
     @POST
-    public Response createUser(Users user) {
+    public Response createUser(UserDto dto) {
 
-        if ((user.getFirstName() == null || user.getFirstName().isEmpty()) || (user.getLastName() == null
-                || user.getLastName().isEmpty())) {
+        if ((dto.firstName == null || dto.firstName.isEmpty()) || (dto.lastName == null
+                || dto.lastName.isEmpty())) {
             return Response.status(Response.Status.BAD_REQUEST).build();
-        } else {
-            user = usersBean.createUser(user);
-        }
+        } 
 
+        Users user = usersBean.createUser(userMapper.toUser(dto));
         if (user.getId() != null) {
-            return Response.status(Response.Status.CREATED).entity(user).build();
+            return Response.status(Response.Status.CREATED).entity(userMapper.fromUser(user)).build();
         } else {
-            return Response.status(Response.Status.CONFLICT).entity(user).build();
+            return Response.status(Response.Status.CONFLICT).entity(userMapper.fromUser(user)).build();
         }
     }
 
     @PUT
+    @ApiOperation(value = "Update a user", notes = "Returns an updated user", response = UserDto.class)
     @Path("{userId}")
-    public Response putZavarovanec(@PathParam("userId") String userId, Users user) {
+    public Response putZavarovanec(@PathParam("userId") String userId, UserDto dto) {
 
-        user = usersBean.putUser(userId, user);
+        Users user = usersBean.putUser(userId, userMapper.toUser(dto));
 
         if (user == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
         } else {
             if (user.getId() != null)
-                return Response.status(Response.Status.OK).entity(user).build();
+                return Response.status(Response.Status.OK).entity(userMapper.fromUser(user)).build();
             else
                 return Response.status(Response.Status.NOT_MODIFIED).build();
         }
@@ -108,7 +112,7 @@ public class UsersResource {
 
     @DELETE
     @Path("{userId}")
-    //@RolesAllowed("admin")
+    @RolesAllowed("admin")
     @Metered(name = "delete-requests")
     public Response deleteUser(@PathParam("userId") String userId) {
 

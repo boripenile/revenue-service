@@ -2,16 +2,19 @@ package com.youngprime.revenue.users;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Date;
 
+import javax.inject.Inject;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Response;
 
 import com.youngprime.revenue.users.dtos.MPJWTToken;
+import com.youngprime.revenue.users.dtos.UserDto;
+import com.youngprime.revenue.users.mappers.UserMapper;
 import com.youngprime.revenue.users.utils.TokenUtil;
 
 public class TestMain {
-
 	
 	public static void main(String[] args) throws IOException {
 
@@ -45,6 +48,6 @@ public class TestMain {
 
         System.out.println(response.getStatus());
         System.out.println(response.readEntity(String.class));
-
+		
     }
 }
